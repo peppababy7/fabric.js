@@ -2936,7 +2936,7 @@ fabric.CommonMethods = {
 
   /**
    * Creates an empty object and copies all enumerable properties of another object to it
-   * This method is mostly for internal use, and not intended for duplicating shapes in canvas. 
+   * This method is mostly for internal use, and not intended for duplicating shapes in canvas.
    * @memberOf fabric.util.object
    * @param {Object} object Object to clone
    * @param {Boolean} [deep] Whether to clone nested objects
@@ -9914,7 +9914,7 @@ fabric.ElementsParser = function(elements, callback, options, reviver, parsingOp
 
     /**
      * Returns coordinates of a center of canvas.
-     * @return {fabric.Point} 
+     * @return {fabric.Point}
      */
     getCenterPoint: function () {
       return new fabric.Point(this.width / 2, this.height / 2);
@@ -11703,6 +11703,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
       this._createCacheCanvas();
     },
 
+    preventTouchStart: true,
     /**
      * When true, objects can be transformed by one side (unproportionally)
      * when dragged on the corners that normally would not do that.
@@ -13247,7 +13248,9 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
      * @param {Event} e Event object fired on mousedown
      */
     _onTouchStart: function(e) {
-      e.preventDefault();
+      if (this.preventTouchStart) {
+        e.preventDefault();
+      }
       if (this.mainTouchId === null) {
         this.mainTouchId = this.getPointerId(e);
       }
@@ -25158,7 +25161,7 @@ fabric.Image.filters.BaseFilter.fromObject = function(object, callback) {
      * Saturation value, from -1 to 1.
      * Increases/decreases the color saturation.
      * A value of 0 has no effect.
-     * 
+     *
      * @param {Number} saturation
      * @default
      */
@@ -25280,7 +25283,7 @@ fabric.Image.filters.BaseFilter.fromObject = function(object, callback) {
      * Vibrance value, from -1 to 1.
      * Increases/decreases the saturation of more muted colors with less effect on saturated colors.
      * A value of 0 has no effect.
-     * 
+     *
      * @param {Number} vibrance
      * @default
      */
